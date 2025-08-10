@@ -1,5 +1,6 @@
 package org.example.handlers;
 
+import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import org.example.controllers.UserController;
 import org.example.responses.ErrorResponse;
 import org.springframework.http.HttpStatus;
@@ -23,4 +24,13 @@ public class UserControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ErrorResponse(e.getMessage()));
     }
+
+    /*
+    @ExceptionHandler(CallNotPermittedException.class)
+    public ResponseEntity<String> handleCircuitBreakerException() {
+        return ResponseEntity
+                .status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body("Сервис UserService временно не доступен");
+    }
+     */
 }
